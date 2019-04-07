@@ -1,0 +1,51 @@
+/* body{
+    background-color: #212529
+} */
+
+/* .container{
+  width: 30% !important; 
+} */
+
+.brand_container{
+  top: 80px;
+  left: 78%;
+  margin-top: -50px;
+  margin-left: -50px;
+  position: absolute;
+  height: 23%;
+  z-index: 2;   
+}
+
+#containerSignup{
+    float:right !important;
+    margin-right: 5% !important;
+}
+
+#formSignup{
+  margin-top:30px;
+}
+
+#persoCardSignup {
+    margin-top: 168px !important;
+    margin-left: -50px;
+    border-radius: 20px;
+    box-shadow:13px 11px 55px -1px rgba(0,0,0,0.73);
+    z-index: 1;
+    background-color: #3c6478 !important
+  }
+
+#persoButtonLinkSignup {
+    text-align: center !important;
+    margin-left: 40% !important;
+    margin-top: 8px;
+
+}
+
+#persoCardBodySignup{
+  padding-top: 35px !important
+}
+
+#Create{
+  width:80% !important;
+  margin: auto
+}

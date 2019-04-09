@@ -5,8 +5,9 @@ import 'bootstrap/dist/js/bootstrap.bundle.min'
 import '../css/App.css'
 
 
-import Login from './login'
-import SignUp from './signup'
+import Login from './Login'
+import SignUp from './Signup'
+import DashBoard from './Dashboard'
 
 import { ApolloProvider } from 'react-apollo'
 import { BrowserRouter, Route } from 'react-router-dom'
@@ -19,6 +20,7 @@ class App extends Component {
         <ApolloProvider client={client}>
           <Route exact path='/' component={() => <Login client={client}/>} />
           <Route exact path='/SignUp' component={() => <SignUp client={client}/>} />
+          <Route exact path='/dashboard' component={() => <DashBoard client={client}/>} />
         </ApolloProvider>
       </BrowserRouter>
     )

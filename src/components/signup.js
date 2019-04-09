@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 //  import gql from 'graphql-tag'
 //  import { Query } from 'react-apollo'
 // import { Link } from 'react-router-dom';
-import '../css//Signup.css'
+import '../css/Signup.css'
 import logo from '../assets/logopng.png'
 
 export default class SignUp extends Component {

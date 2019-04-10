@@ -1,8 +1,4 @@
 import React, { Component } from 'react';
-//  import { Redirect } from 'react-router-dom';
-//  import gql from 'graphql-tag'
-//  import { Query } from 'react-apollo'
-// import { Link } from 'react-router-dom';
 import '../css/Signup.css'
 import logo from '../assets/logopng.png'
 

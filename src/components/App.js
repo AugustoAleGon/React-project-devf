@@ -8,6 +8,8 @@ import '../css/App.css'
 import Login from './Login'
 import SignUp from './Signup'
 import DashBoard from './Dashboard'
+import StreamingView from './StreamingView'
+import Home from './Home'
 
 import { ApolloProvider } from 'react-apollo'
 import { BrowserRouter, Route } from 'react-router-dom'
@@ -18,9 +20,11 @@ class App extends Component {
     return (
       <BrowserRouter>
         <ApolloProvider client={client}>
-          <Route exact path='/' component={() => <Login client={client}/>} />
+          <Route exact path='/' component={() => <Home client={client}/>} />
+          <Route exact path='/Login' component={() => <Login client={client}/>} />
           <Route exact path='/SignUp' component={() => <SignUp client={client}/>} />
-          <Route exact path='/dashboard' component={() => <DashBoard client={client}/>} />
+          <Route exact path='/Dashboard' component={() => <DashBoard client={client}/>} />
+          <Route exact path='/Streaming' component={() => <StreamingView client={client}/>} />
         </ApolloProvider>
       </BrowserRouter>
     )

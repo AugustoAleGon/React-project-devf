@@ -4,7 +4,7 @@ import { createHttpLink } from 'apollo-link-http';
 import { InMemoryCache } from 'apollo-cache-inmemory'
 
 const httpLink = createHttpLink({
-    uri : 'https://gennin-black.herokuapp.com/'
+    uri : 'https://inserverbetlab.herokuapp.com/'
 })
 
 const authLink = setContext((_, {headers}) => {

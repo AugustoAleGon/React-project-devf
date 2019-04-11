@@ -13,19 +13,13 @@ export default class ProfileDashboard extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      name: '',
-      username: '',
-      email: ''
+      name: props.user.name,
+      username: props.user.username,
+      email: props.user.email
     }
   }
 
   componentDidMount() {
-    // this.props.client
-    //   .query({ query: GET_USER, variables: { email: this.state.email }})
-    //   .then(result => {
-    //     console.log(result.data)
-    //     //set state name, username and mail
-    //   })
   }
 
   render() {

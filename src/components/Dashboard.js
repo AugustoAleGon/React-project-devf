@@ -1,22 +1,22 @@
 import React, { Component } from 'react';
+import { withRouter } from 'react-router-dom';
 import ProfileDashboard from './ProfileDashboard'
 import BodyDashboard from './BodyDashboard'
 import NavBar from './NavBar'
 import '../css/Dashboard.css'
 
 
-export default class Dashboard extends Component {
+ class Dashboard extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      email:'',
+      email: '',
       isLoading: true
     }
   }
 
   componentDidMount() {
-    //  console.log(this.props.location.state)
-    // get email from login
+    // console.log(this.props.location.state.data.email)
     let token = localStorage.getItem("token")
     if (token) {
       this.setState({
@@ -25,16 +25,25 @@ export default class Dashboard extends Component {
     }
   }
 
-  //establecer this.state.isLoading ? <div>Loading...</div> : <div>Hola usuario</div>
+
   render() {
+    //this.state.isLoading ? <div>Loading...</div> : <div>Hola usuario</div>
+    // if(localStorage.getItem("token")){
     return (
       <div>
-        <NavBar/>
+        <NavBar />
         <div>
-          <ProfileDashboard client={this.props.client}/>
-          <BodyDashboard />
+          {this.state.isLoading ? <div>Loading...</div> : <div><ProfileDashboard user={this.props.location.state.data} /><BodyDashboard /></div>
+          }          
+          {/* <ProfileDashboard client={this.props.client} />
+          <BodyDashboard /> */}
         </div>
       </div>
     )
+    // return(
+    //   <div>User not authenticated</div>
+    // )
   }
 }
+
+export default withRouter(Dashboard)

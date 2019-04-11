@@ -7,7 +7,14 @@ import logo from '../assets/logopng.png'
 
 const LOGIN_USER = gql`
 mutation LOGIN($email:String!,$password:String!){
-    login(email:$email, password:$password)
+    login(email:$email, password:$password){
+      token
+      user{
+        name
+        username
+        email
+      }
+    }
 }
 `
 
@@ -41,11 +48,11 @@ class Login extends Component {
     this.props.client
     .mutate({ mutation: LOGIN_USER, variables: { email: this.state.email, password: this.state.password } })
     .then(result => {
-      console.log(result.data.login)
-      localStorage.setItem("token", result.data.login)
+      console.log(result.data)
+      localStorage.setItem("token", result.data.login.token)
       this.props.history.push({
         pathname:`/Dashboard`,
-        state: {email: this.state.email}
+        state:{data: result.data.login.user}
     })
     })
   }

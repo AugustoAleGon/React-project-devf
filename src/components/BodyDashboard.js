@@ -1,35 +1,54 @@
 import React, { Component } from 'react';
+import axios from 'axios';
+import { withRouter } from 'react-router-dom';
 import '../css/Dashboard.css'
 import logo from '../assets/logopng1.png'
 import logoAvatar from '../assets/jorge_avatar.png'
 
 const searchingFor= (term) => {
   return (x)=> {
-    return x.alt.toLowerCase().includes(term.toLowerCase()) || !term
+    return x.channel.name.toLowerCase().includes(term.toLowerCase()) || !term
   }
 }
 
-export default class BodyDashboard extends Component {
+class BodyDashboard extends Component {
     constructor(props) {
       super(props)
       this.state = {
           search:'',
-          streamingCovers:[
-            {id:1,alt:'lol',src:logoAvatar, name:'Room 1'},
-            {id:2,alt:'wow',src:logo , name:'Room 2'},
-            {id:3,alt:'bunny',src:logoAvatar, name:'Room 3'},
-            {id:4,alt:'bunnyHola',src:logo, name:'Room 4'}
-          ]
+          streamingList: []
       }
     }
     
-    componentDidMount() {
+    async componentDidMount() {
+      await new Promise((resolve, reject) => {
+        axios.get('https://api.twitch.tv/kraken/streams', {
+        headers: {
+          'Accept': 'application/vnd.twitchtv.v5+json',
+          'Client-ID': 'scxdbzxpk53xsvdpof689m8hfj8fb6'
+        }
+      }).then((response) => {
+        console.log(response.data.streams)
+        this.setState({
+          streamingList: this.state.streamingList.concat(response.data.streams)
+        })
+        resolve(true)
+      })
+    })
     }
   
     handleSearch= (e) => {
       this.setState({
         search: e.target.value
       });
+    }
+
+    handleStreaming = (e) => {
+      console.log(e.target.id)
+      this.props.history.push({
+        pathname:`/Streaming`,
+        state:{url: e.target.id }
+    })
     }
 
     render() {
@@ -40,12 +59,14 @@ export default class BodyDashboard extends Component {
                 <input value={this.state.search} type="text" placeholder="Search Rooms" id="filter-search" className="form-control form-control-sm ml-3 w-75" aria-label="Search" onChange={this.handleSearch}/>
             </div>
             <div id="covers">
-            {
-              this.state.streamingCovers.filter(searchingFor(this.state.search)).map((streaming) =>{
+            { 
+              this.state.streamingList && this.state.streamingList.length > 0 ?
+              this.state.streamingList.filter(searchingFor(this.state.search)).map((streaming) => {
                 return (
-                      <img key={streaming.id} id={streaming.id} className="coverDash" src={streaming.src} alt={streaming.alt} />
+                      <img key={streaming._id} id={streaming.channel.url} className="coverDash" src={streaming.preview.large} alt="Hola" onClick={this.handleStreaming}/>
                 )
               })
+              : null
             }
             </div>
           </div>
@@ -53,3 +74,5 @@ export default class BodyDashboard extends Component {
       )
     }
   }
+
+  export default withRouter(BodyDashboard)

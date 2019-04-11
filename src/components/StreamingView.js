@@ -1,9 +1,18 @@
 import React, { Component } from 'react'
 import ReactPlayer from 'react-player'
 import logo from '../assets/logopng.png'
+import { withRouter } from 'react-router-dom';
 // import logoAvatar from '../assets/jorge_avatar.png'
 
-export default class StreamingView extends Component {
+class StreamingView extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+    }
+  }
+  componentDidMount (){
+    console.log("Stream",this.props)
+  }
   render () {
     return (
         <div>
@@ -19,11 +28,12 @@ export default class StreamingView extends Component {
             </nav>  
           </div>  
           <div> 
-          <ReactPlayer url='https://www.twitch.tv/tfue' playing />
-          <ReactPlayer url='https://www.twitch.tv/nl_kripp' playing />
+          <ReactPlayer url={this.props.location.state.url} playing />
           </div>
           
         </div>
     )
   }
 }
+
+export default withRouter(StreamingView)

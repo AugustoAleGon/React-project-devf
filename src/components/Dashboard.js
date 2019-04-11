@@ -5,7 +5,6 @@ import BodyDashboard from './BodyDashboard'
 import NavBar from './NavBar'
 import '../css/Dashboard.css'
 
-
  class Dashboard extends Component {
   constructor(props) {
     super(props)
@@ -15,7 +14,7 @@ import '../css/Dashboard.css'
     }
   }
 
-  componentDidMount() {
+  async componentDidMount () {
     // console.log(this.props.location.state.data.email)
     let token = localStorage.getItem("token")
     if (token) {
@@ -23,8 +22,8 @@ import '../css/Dashboard.css'
         isLoading: false
       })
     }
-  }
 
+  }
 
   render() {
     //this.state.isLoading ? <div>Loading...</div> : <div>Hola usuario</div>
@@ -33,7 +32,7 @@ import '../css/Dashboard.css'
       <div>
         <NavBar />
         <div>
-          {this.state.isLoading ? <div>Loading...</div> : <div><ProfileDashboard user={this.props.location.state.data} /><BodyDashboard /></div>
+          {this.state.isLoading ? <div>Loading...</div> : <div><ProfileDashboard user={this.props.location.state.data} /><BodyDashboard/></div>
           }          
           {/* <ProfileDashboard client={this.props.client} />
           <BodyDashboard /> */}

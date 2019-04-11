@@ -14,6 +14,11 @@ export default class NavBar extends Component {
   componentDidMount() {
   }
 
+  handleLogout = () => {
+    localStorage.removeItem("token")
+    localStorage.removeItem("user")
+  }
+
   render() {
     return (
       <div>
@@ -24,7 +29,7 @@ export default class NavBar extends Component {
               <span className="labelNav">BetLab</span>
             </a>
             <form className="form-inline">
-              <button className="btn btn-success my-2 my-sm-0" >Logout</button>
+              <button className="btn btn-success my-2 my-sm-0" onClick={this.handleLogout}>Logout</button>
             </form>
           </nav>
         </div>

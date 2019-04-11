@@ -3,14 +3,17 @@ import { withRouter } from 'react-router-dom';
 import ProfileDashboard from './ProfileDashboard'
 import BodyDashboard from './BodyDashboard'
 import NavBar from './NavBar'
+import Home from './Home'
 import '../css/Dashboard.css'
+
 
  class Dashboard extends Component {
   constructor(props) {
     super(props)
     this.state = {
       email: '',
-      isLoading: true
+      isLoading: true,
+      isLogged: false
     }
   }
 
@@ -19,23 +22,20 @@ import '../css/Dashboard.css'
     let token = localStorage.getItem("token")
     if (token) {
       this.setState({
-        isLoading: false
+        isLoading: false,
+        isLogged: true
       })
     }
 
   }
 
   render() {
-    //this.state.isLoading ? <div>Loading...</div> : <div>Hola usuario</div>
-    // if(localStorage.getItem("token")){
     return (
       <div>
         <NavBar />
         <div>
-          {this.state.isLoading ? <div>Loading...</div> : <div><ProfileDashboard user={this.props.location.state.data} /><BodyDashboard/></div>
+          {this.state.isLogged ?  this.state.isLoading ? <div>Loading...</div> : <div><ProfileDashboard /><BodyDashboard/></div> : <Home/>
           }          
-          {/* <ProfileDashboard client={this.props.client} />
-          <BodyDashboard /> */}
         </div>
       </div>
     )

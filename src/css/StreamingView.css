@@ -1,0 +1,13 @@
+.playerComponent{
+  margin-top: 5%;
+  margin-left: 10%;
+  width: 15%
+}
+
+.gameTitle{
+  margin-left: 5%;
+  margin-top: 3%;
+  font-family: sans-serif;
+  color: white;
+  font-size: 25px;
+}

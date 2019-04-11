@@ -44,10 +44,10 @@ class BodyDashboard extends Component {
     }
 
     handleStreaming = (e) => {
-      console.log(e.target.id)
+      const {name, views , game , url } = JSON.parse(e.target.alt).channel
       this.props.history.push({
         pathname:`/Streaming`,
-        state:{url: e.target.id }
+        state:{name, views, game, url }
     })
     }
 
@@ -62,8 +62,9 @@ class BodyDashboard extends Component {
             { 
               this.state.streamingList && this.state.streamingList.length > 0 ?
               this.state.streamingList.filter(searchingFor(this.state.search)).map((streaming) => {
+                console.log(streaming)
                 return (
-                      <img key={streaming._id} id={streaming.channel.url} className="coverDash" src={streaming.preview.large} alt="Hola" onClick={this.handleStreaming}/>
+                      <img key={streaming._id} id={streaming._id} alt={JSON.stringify(streaming)} className="coverDash" src={streaming.preview.large} onClick={this.handleStreaming}/>
                 )
               })
               : null

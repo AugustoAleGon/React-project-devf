@@ -50,6 +50,7 @@ class Login extends Component {
     .then(result => {
       console.log(result.data)
       localStorage.setItem("token", result.data.login.token)
+      localStorage.setItem("user", JSON.stringify(result.data.login.user))
       this.props.history.push({
         pathname:`/Dashboard`,
         state:{data: result.data.login.user}

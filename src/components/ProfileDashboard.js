@@ -13,9 +13,9 @@ export default class ProfileDashboard extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      name: props.user.name,
-      username: props.user.username,
-      email: props.user.email
+      name: JSON.parse(localStorage.getItem("user")).name,
+      username: JSON.parse(localStorage.getItem("user")).username,
+      email: JSON.parse(localStorage.getItem("user")).email
     }
   }
 

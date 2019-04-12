@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { withRouter } from 'react-router-dom';
 import '../css/Signup.css'
 import logo from '../assets/logopng.png'
 import gql from 'graphql-tag'
@@ -6,18 +7,18 @@ import '../css/Login.css'
 
 const CREATE_USER = gql`
 mutation SIGNUP($email:String!, $username:String!, $password:String!, $name:String!){
-  signUp(name:$name, username:$username, email:$email,password:$password)}
-  {
+  signUp(name:$name, username:$username, email:$email,password:$password){
     token
     user{
         name
         username
         email
-      }
+    }
   }
+}
 `
 
-export default class SignUp extends Component {
+ class SignUp extends Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -34,7 +35,6 @@ export default class SignUp extends Component {
   }
 
   handleEmailChange = (e) => {
-    // Verificar que el email no este registrado en base de datos
     this.setState({
       email: e.target.value
     });
@@ -47,7 +47,6 @@ export default class SignUp extends Component {
   }
 
   handleUsernameChange = (e) => {
-    // Verificar que el username sea unico
     this.setState({
       username: e.target.value
     });
@@ -72,17 +71,18 @@ export default class SignUp extends Component {
   }
 
   handleSubmit = (e) => {
-    e.preventDefault();
+    e.preventDefault()
     this.props.client
-    .mutate({ mutation: CREATE_USER, variables: { email: this.state.email, password: this.state.password , username:this.state.username, name:this.state.firstName} })
-    .then(result => {
-      console.log(result.data)
-      // localStorage.setItem("token", result.data.login.token)
-      // localStorage.setItem("user", user)
-      //   this.props.history.push({
-      //     pathname:`/Dashboard`
-      // })
-    })
+      .mutate({ mutation: CREATE_USER, variables: { email: this.state.email, password: this.state.password, username: this.state.username, name: this.state.firstName }})
+      .then(result => {
+        localStorage.setItem("token", result.data.signUp.token)
+        localStorage.setItem("user", JSON.stringify(result.data.signUp.user))
+        this.props.history.push({
+          pathname: `/Dashboard`,
+          state: { data: result.data.signUp.user }
+        })
+      })
+      .catch((err) => console.log(err))
   }
 
   render() {
@@ -143,3 +143,5 @@ export default class SignUp extends Component {
     )
   }
 }
+
+export default withRouter(SignUp)

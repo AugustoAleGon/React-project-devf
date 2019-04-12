@@ -7,7 +7,7 @@ import logoAvatar from '../assets/jorge_avatar.png'
 
 const searchingFor= (term) => {
   return (x)=> {
-    return x.channel.name.toLowerCase().includes(term.toLowerCase()) || !term
+    return x.channel.game.toLowerCase().includes(term.toLowerCase()) || !term
   }
 }
 
@@ -55,10 +55,10 @@ class BodyDashboard extends Component {
       return (  
         <div>
           <div className="BodyDash">
-            <div id="search">
+            <div className="search" id="search">
                 <input value={this.state.search} type="text" placeholder="Search Rooms" id="filter-search" className="form-control form-control-sm ml-3 w-75" aria-label="Search" onChange={this.handleSearch}/>
             </div>
-            <div id="covers">
+            <div id="coversDash">
             { 
               this.state.streamingList && this.state.streamingList.length > 0 ?
               this.state.streamingList.filter(searchingFor(this.state.search)).map((streaming) => {

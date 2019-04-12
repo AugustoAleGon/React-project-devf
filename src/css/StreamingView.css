@@ -1,13 +1,17 @@
 .playerComponent{
   margin-top: 5%;
   margin-left: 10%;
-  width: 15%
 }
 
 .gameTitle{
-  margin-left: 5%;
+  /* margin-left: 5%; */
   margin-top: 3%;
-  font-family: sans-serif;
+  font-family: 'Roboto';
   color: white;
   font-size: 25px;
+  float: left;
+}
+
+.views{
+  margin-left: 28%;
 }

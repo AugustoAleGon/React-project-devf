@@ -3,7 +3,8 @@ import ReactPlayer from 'react-player'
 import logo from '../assets/logopng.png'
 import { withRouter } from 'react-router-dom';
 import '../css/StreamingView.css'
-// import logoAvatar from '../assets/jorge_avatar.png'
+
+import 'typeface-roboto';
 
 class StreamingView extends Component {
   constructor(props) {
@@ -40,11 +41,17 @@ class StreamingView extends Component {
         <div className="playerComponent">
           <ReactPlayer url={this.state.url} playing width="850px" height="478px" />
           <div className="gameTitle">
-            {
-              this.state.game
-            }
-          </div>
+              {
+                this.state.game
+              }.
+            </div>
+            <div className="gameTitle views">Vistas: 
+              {
+                this.state.views
+              }
+            </div>
         </div>
+            
       </div>
     )
   }

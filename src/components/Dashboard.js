@@ -12,17 +12,14 @@ import '../css/Dashboard.css'
     super(props)
     this.state = {
       email: '',
-      isLoading: true,
       isLogged: false
     }
   }
 
   async componentDidMount () {
-    // console.log(this.props.location.state.data.email)
     let token = localStorage.getItem("token")
     if (token) {
       this.setState({
-        isLoading: false,
         isLogged: true
       })
     }
@@ -34,7 +31,7 @@ import '../css/Dashboard.css'
       <div>
         <NavBar />
         <div>
-          {this.state.isLogged ?  this.state.isLoading ? <div>Loading...</div> : <div><ProfileDashboard /><BodyDashboard/></div> : <Home/>
+          {this.state.isLogged ?   <div><ProfileDashboard /><BodyDashboard/></div> : <div>Loading...</div>
           }          
         </div>
       </div>

@@ -6,7 +6,7 @@ class Home extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      isLogged: true
+      isLogged: ''
     }
   }
 
@@ -17,11 +17,19 @@ class Home extends Component {
         isLogged: true
       })
     }
+    else{
+      this.setState({
+        isLogged: false
+      })
+    }
   }
 
   render() {
     return (
       <div>
+      {
+        this.state.isLogged ? this.props.history.push('/Dashboard') : this.props.history.push('/Login')
+      }
       </div>
     )
   }

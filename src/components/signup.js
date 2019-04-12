@@ -1,6 +1,21 @@
 import React, { Component } from 'react';
 import '../css/Signup.css'
 import logo from '../assets/logopng.png'
+import gql from 'graphql-tag'
+import '../css/Login.css'
+
+const CREATE_USER = gql`
+mutation SIGNUP($email:String!, $username:String!, $password:String!, $name:String!){
+  signUp(name:$name, username:$username, email:$email,password:$password)}
+  {
+    token
+    user{
+        name
+        username
+        email
+      }
+  }
+`
 
 export default class SignUp extends Component {
   constructor(props) {
@@ -57,18 +72,26 @@ export default class SignUp extends Component {
   }
 
   handleSubmit = (e) => {
-    //  Se realiza la creacion del usuario
-    console.log(this.state)
     e.preventDefault();
+    this.props.client
+    .mutate({ mutation: CREATE_USER, variables: { email: this.state.email, password: this.state.password , username:this.state.username, name:this.state.firstName} })
+    .then(result => {
+      console.log(result.data)
+      // localStorage.setItem("token", result.data.login.token)
+      // localStorage.setItem("user", user)
+      //   this.props.history.push({
+      //     pathname:`/Dashboard`
+      // })
+    })
   }
 
   render() {
     return (
       <div id="containerSignup" className="container">
         <div className="brand_container_logo">
-                <a href='/'>
-                  <img src={logo} className="brand_container" alt="Logo" />
-                </a>
+          <a href='/'>
+            <img src={logo} className="brand_container" alt="Logo" />
+          </a>
         </div>
         <div id="persoCardSignup" className="card card-login mx-auto mt-5 perso">
           <div className="card-body">
